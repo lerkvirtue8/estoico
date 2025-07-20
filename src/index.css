@@ -1,0 +1,6 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap');
