@@ -1,6 +1,50 @@
-﻿@tailwind base;
+﻿/* src/index.css */
+
+/* IMPORTANT: @import rules and global html/body resets must come first */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+/* Global reset for html and body margins/padding */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Prevents horizontal scrollbars */
+}
+
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Optional: import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap');
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Custom Scrollbar for Shopping Cart */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #6a6a6a;
+}
