@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 // Import your custom Card and Tabs components
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -20,7 +20,13 @@ const translations = {
     total: "Total:",
     checkout: "Checkout",
     addToCart: "Add to Cart",
-    purchaseMessage: "Thank you for your purchase! Your order has been placed.",
+    purchaseMessage: "Thank도가 you for your purchase! Your order has been placed.",
+    styleForBrave: "STYLE FOR THE BRAVE",
+    estoicoRises: "ESTOICO RISES FROM THE DEPTHS.",
+    accessoriesPresence: "ACCESSORIES WITH PRESENCE", // Changed to uppercase for consistency
+    mixElegance: "MIX ELEGANCE WITH ATTITUDE", // Changed to uppercase for consistency
+    discover: "Discover",
+    shop: "Shop",
   },
   es: {
     wearYourPower: "Viste Tu Poder",
@@ -37,6 +43,12 @@ const translations = {
     checkout: "Pagar",
     addToCart: "Añadir al Carrito",
     purchaseMessage: "¡Gracias por tu compra! Tu pedido ha sido realizado.",
+    styleForBrave: "ESTILO PARA LOS VALIENTES",
+    estoicoRises: "ESTOICO SE ALZA DESDE LAS PROFUNDIDADES.",
+    accessoriesPresence: "ACCESORIOS CON PRESENCIA",
+    mixElegance: "MEZCLA ELEGANCIA CON ACTITUD",
+    discover: "Descubrir",
+    shop: "Comprar",
   },
   zh: {
     wearYourPower: "穿上你的力量",
@@ -53,6 +65,12 @@ const translations = {
     checkout: "结账",
     addToCart: "加入购物车",
     purchaseMessage: "感谢您的购买！您的订单已下达。",
+    styleForBrave: "勇敢者的风格",
+    estoicoRises: "ESTOICO 从深渊中崛起。",
+    accessoriesPresence: "有存在感的配饰",
+    mixElegance: "将优雅与态度融合",
+    discover: "发现",
+    shop: "商店",
   },
   de: {
     wearYourPower: "Trage Deine Kraft",
@@ -69,6 +87,12 @@ const translations = {
     checkout: "Zur Kasse",
     addToCart: "In den Warenkorb",
     purchaseMessage: "Vielen Dank für Ihren Einkauf! Ihre Bestellung wurde aufgegeben.",
+    styleForBrave: "STIL FÜR DIE MUTIGEN",
+    estoicoRises: "ESTOICO ERHEBT SICH AUS DER TIEFE.",
+    accessoriesPresence: "ACCESSOIRES MIT PRÄSENZ",
+    mixElegance: "ELEGANZ MIT HALTUNG MISCHEN",
+    discover: "Entdecken",
+    shop: "Kaufen",
   },
   fr: {
     wearYourPower: "Portez Votre Pouvoir",
@@ -85,6 +109,12 @@ const translations = {
     checkout: "Commander",
     addToCart: "Ajouter au panier",
     purchaseMessage: "Merci pour votre achat ! Votre commande a été passée.",
+    styleForBrave: "STYLE POUR LES COURAGEUX",
+    estoicoRises: "ESTOICO S'ÉLÈVE DES PROFONDEURS.",
+    accessoriesPresence: "ACCESSOIRES AVEC PRÉSENCE",
+    mixElegance: "MÉLANGEZ ÉLÉGANCE ET ATTITUDE",
+    discover: "Découvrir",
+    shop: "Acheter",
   },
 };
 
@@ -553,6 +583,12 @@ export default function App() {
   // State for managing language
   const [currentLanguage, setCurrentLanguage] = useState('en'); // Default language is English
 
+  // State for managing active tab in product section
+  const [activeTab, setActiveTab] = useState('Apparel'); // Default active tab
+
+  // Ref for the product tabs section to enable scrolling
+  const productTabsRef = useRef(null);
+
   // Function to handle opening the lightbox
   const handleImageClick = (product, category, index) => {
     setCurrentImage(product);
@@ -637,7 +673,7 @@ export default function App() {
       style={{ backgroundImage: 'url(/images/bg.jpeg)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}
     >
       {/* Top Bar for Cart Icon and Language Selector - Now fixed to viewport */}
-      <div className="fixed top-0 right-0 p-4 z-50 flex items-center space-x-4"> {/* Changed to fixed and added space-x-4 */}
+      <div className="fixed top-0 right-0 p-4 z-50 flex items-center space-x-4">
         {/* Language Selector */}
         <div className="relative">
           <select
@@ -669,7 +705,6 @@ export default function App() {
       </div>
 
       {/* Video Header Section */}
-      {/* Removed mt-[-1px] as fixed positioning of buttons should resolve space */}
       <section className="relative h-[45vh] md:h-[65vh] w-full overflow-hidden flex items-center justify-center">
         <video
           src="https://www.dirtmercy.com/barrix/files/estoico_ad.mp4"
@@ -680,17 +715,99 @@ export default function App() {
           className="absolute inset-0 object-cover w-full h-full brightness-[0.3] transition-all duration-500 ease-in-out hover:brightness-[0.4]"
         />
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 animate-fade-in-up">
-          <img
-            src="/images/logo.png"
-            alt="ESTOICO logo"
-            className="max-w-xs md:max-w-md mb-6 drop-shadow-2xl transition-transform duration-500 ease-out hover:scale-105"
-          />
-          {/* Removed h1 and p overlay text */}
+          {/* Removed the img tag for the logo overlay */}
         </div>
       </section>
 
       {/* Gradient fade beneath hero video */}
       <div className="relative w-full h-24 bg-gradient-to-b from-black to-transparent z-10"></div>
+
+      {/* Image with left-aligned overlay text */}
+      <section className="flex justify-center py-16 relative">
+        <div className="w-[70%] relative">
+          <img
+            src="https://www.dirtmercy.com/barrix/wp-content/uploads/2025/03/Picsart_25-03-22_18-25-03-212.jpg"
+            alt="Estoico Rising"
+            className="w-full rounded-lg shadow-xl object-cover"
+          />
+          <div className="absolute top-8 left-8 text-left text-white max-w-[40%]">
+            <p className="text-sm uppercase tracking-widest text-[#ccc] mb-2">
+              {t.styleForBrave}
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+              {t.estoicoRises}
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      {/* Four model images in a row */}
+      <section className="w-full py-10 bg-[#0f0f0f]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {[
+            "https://www.dirtmercy.com/barrix/wp-content/uploads/2025/03/picture-of-model-from-the-knees-up-candid-mens-casual-apparel-couture-and-hip-hop-influences-come-together-with-street-fashion-ESTOICO-wear-stoic-bold-kickass-UIux_image_1-559x1024.jpg",
+            "https://www.dirtmercy.com/barrix/wp-content/uploads/2025/03/picture-of-model-from-the-knees-up-candid-mens-casual-apparel-couture-and-hip-hop-influences-come-together-with-street-fashion-ESTOICO-wear-stoic-bold-kickass-UIux_image_1-2-559x1024.jpg",
+            "https://www.dirtmercy.com/barrix/wp-content/uploads/2025/03/picture-of-model-from-the-knees-up-candid-mens-casual-apparel-couture-and-hip-hop-influences-come-together-with-street-fashion-ESTOICO-wear-stoic-bold-kickass-UIux_image_1-3-559x1024.jpg",
+            "https://www.dirtmercy.com/barrix/wp-content/uploads/2025/03/picture-of-model-from-the-knees-up-candid-mens-casual-apparel-couture-and-hip-hop-influences-come-together-with-street-fashion-ESTOICO-wear-stoic-bold-kickass-UIux_image_1-1-559x1024.jpg"
+          ].map((url, idx) => (
+            <img
+              key={idx}
+              src={url}
+              alt={`Estoico Model ${idx + 1}`}
+              className="w-full h-auto object-cover"
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Accessories Section - Updated to match Oswald styling with background image */}
+      <section
+        className="text-center px-6 py-12 w-full relative overflow-hidden h-[60vh] flex flex-col items-center justify-center"
+        style={{
+          backgroundImage: 'url("https://www.dirtmercy.com/barrix/wp-content/uploads/2025/03/6RyHC8tD614X_6uRYzpRF_cd81675d9d594049a4def9581613af10.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundAttachment: 'fixed',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Optional: Add an overlay div for better text readability if needed */}
+        {/* <div className="absolute inset-0 bg-black opacity-40"></div> */}
+
+        {/* Adjusted font-size using custom utility classes for vw-based sizing */}
+        <h2 className="font-oswald text-[3.5vw] font-bold uppercase tracking-wide text-[#0A4A4A] mb-0.5 md:text-[3.5vw] z-10">
+          {t.accessoriesPresence}
+        </h2>
+        <h3 className="font-oswald text-[2vw] uppercase text-white mb-1 tracking-wider md:text-[2vw] z-10">
+          {t.mixElegance}
+        </h3>
+        <div className="flex flex-wrap justify-center z-10" style={{ gap: '5vw', marginTop: '10px' }}>
+          <a href="#catalogue" onClick={(e) => {
+            e.preventDefault();
+            setActiveTab('Accessories'); // Set tab to Accessories
+            productTabsRef.current?.scrollIntoView({ behavior: 'smooth' });
+          }}>
+            <button
+              className="border border-black bg-white text-black font-oswald font-bold uppercase tracking-wider transition hover:bg-gray-100"
+              style={{ padding: '1vw 2vw', fontSize: '1.5vw' }}
+            >
+              {t.discover}
+            </button>
+          </a>
+          <a href="#catalogue" onClick={(e) => {
+            e.preventDefault();
+            setActiveTab('Apparel'); // Set tab to Apparel
+            productTabsRef.current?.scrollIntoView({ behavior: 'smooth' });
+          }}>
+            <button
+              className="border border-black bg-white text-black font-oswald font-bold uppercase tracking-wider transition hover:bg-gray-100"
+              style={{ padding: '1vw 2vw', fontSize: '1.5vw' }}
+            >
+              {t.shop}
+            </button>
+          </a>
+        </div>
+      </section>
 
       {/* Manifesto Section */}
       <section className="max-w-4xl mx-auto px-6 py-16 bg-gray-900 bg-opacity-70 rounded-lg shadow-2xl my-12 transform hover:scale-[1.01] transition-transform duration-300 ease-out">
@@ -703,11 +820,11 @@ export default function App() {
       </section>
 
       {/* Product Tabs Section */}
-      <section className="px-4 py-12 max-w-7xl mx-auto">
+      <section ref={productTabsRef} className="px-4 py-12 max-w-7xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-white text-shadow-white-glow">
           {t.catalogue}
         </h2>
-        <Tabs defaultValue="Apparel" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 p-1 bg-[#2a2a2a] rounded-lg shadow-inner mb-8">
             {Object.keys(products).map((category) => (
               <TabsTrigger key={category} value={category} className="text-lg md:text-xl">
