@@ -5,7 +5,11 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000,
+    port: 3000, // still used for local dev
+  },
+  preview: {
+    port: parseInt(process.env.PORT) || 4173, // used by `vite preview` on Render
+    host: true, // allows external access
   },
   resolve: {
     alias: {
